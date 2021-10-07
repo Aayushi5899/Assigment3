@@ -1,0 +1,60 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RazorPagesMovie.Data;
+using System;
+using System.Linq;
+
+namespace RazorPagesTravels.Models
+{
+    public static class SeedData
+    {
+        public static void Initialize(IServiceProvider serviceProvider)
+        {
+            using (var context = new RazorPagesTravelsContext(
+                serviceProvider.GetRequiredService<
+                    DbContextOptions<RazorPagesMovieContext>>()))
+            {
+                // Look for any movies.
+                if (context.Travel.Any())
+                {
+                    return;   // DB has been seeded
+                }
+
+                context.Travel.AddRange(
+                    new Travel
+                    {
+                        Place = "New-Zealand",
+                        Personname = "Abbey",
+                        days = 4 ,
+                        Price = 300
+                    },
+
+                    new Travel
+                    {
+                         Place = "Canada",
+                        Personname = "Tim",
+                        days = 5 ,
+                        Price = 450
+                    },
+
+                    new Travel
+                    {
+                         Place = "Australia",
+                        Personname = "Sam",
+                        days = 2 ,
+                        Price = 200
+                    },
+
+                    new Travel
+                    {
+                         Place = "America",
+                        Personname = "Jem",
+                        days = 4 ,
+                        Price = 500
+                    }
+                );
+                context.SaveChanges();
+            }
+        }
+    }
+}
