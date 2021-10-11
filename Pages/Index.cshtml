@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["places"] = "Home page";
+
+    
+    var content = new [] {
+        new {
+            places = "Canada",
+            attraction = "CN tower",
+            days = "5 days",
+            package = "yes"
+        },
+        new {
+            places = "New Zealand",
+            attraction = "Queens town",
+            days = "7 days",
+            package = "yes"
+        },
+        new {
+            places = "India",
+            attraction = "Taj Mahal",
+            days = "5 days",
+            package = "no"
+        },
+        new {
+            places = "China",
+            attraction = "The great wall of china",
+            days = "3 days",
+            package = "yes"
+        },
+        new {
+            places = "Australia",
+            attraction = "Sydney",
+            days = "8 days",
+            package = "no"
+        }
+    };
+}
+
+@for(var i = 0; i < content.Length; i++)
+{
+    <div class="card">
+        <h3 class="card-header">@content[i].places</h3>
+        <p class="card-body">@content[i].attraction</p>
+        <div class="type">@content[i].days</div>
+        <div class="tag">@content[i].package</div>
+    </div>
+}

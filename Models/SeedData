@@ -1,0 +1,58 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RazorPagesAssignmentSample.Data;
+using System;
+using System.Linq;
+
+namespace RazorPagesAssignmentSample.Models
+{
+    public static class SeedData
+    {
+        public static void Initialize(IServiceProvider serviceProvider)
+        {
+            using (var context = new RazorPagesAssignmentSampleContext(
+                serviceProvider.GetRequiredService<
+                    DbContextOptions<RazorPagesAssignmentSampleContext>>()))
+            {
+                if (context.place.Any())
+                {
+                    return;   // DB has been seeded
+                }
+                context.place.AddRange(
+                    new place
+                    {
+            places = "Canada",
+            attraction = "CN tower",
+            days = "5 days",
+            package = "yes"
+        },
+        new place{
+            places = "New Zealand",
+            attraction = "Queens town",
+            days = "7 days",
+            package = "yes"
+        },
+        new place{
+            places = "India",
+            attraction = "Taj Mahal",
+            days = "5 days",
+            package = "no"
+        },
+        new place{
+            places = "China",
+            attraction = "The great wall of china",
+            days = "3 days",
+            package = "yes"
+        },
+        new place {
+            places = "Australia",
+            attraction = "Sydney",
+            days = "8 days",
+            package = "no"
+        }
+        );
+                context.SaveChanges();
+            }
+        }
+    }
+}
